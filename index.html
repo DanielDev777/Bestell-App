@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellapp</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="./css/fontimport.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/main-section.css">
+    <link rel="stylesheet" href="./css/cart.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="./assets/img/logo/Bestell App- Logo.svg">
+        </div>
+    </header>
+    <section class="main-container">
+        <section class="main-content">
+            <img src="./assets/img/main-banner.jpg" class="banner-img">
+            <h1 class="pt20 pr20 pb50 pl20">Pizza Heaven</h1>
+            <div class="main-dishes">
+                <img src="./assets/img/pizza-banner.jpg" class="radius">
+                <h2 class="pb20">Hauptgerichte</h2>
+                <div id="main-course"></div>
+            </div>
+            <div class="side-dishes">
+                <img src="./assets/img/pizza-rolls.jpg" class="radius">
+                <h2 class="pb20">Beilagen</h2>
+                <div id="snacks"></div>
+            </div>
+        </section>
+        <section class="side-content">
+            <h3 class="pt20 pb20 center">Warenkorb</h3>
+            <div class="pr10 pl10" id="cart"></div>
+            <div class="pt10 pr10 pl10" id="cart-summary">
+                <div class="summary-details">
+                    <div class="detail pb10">
+                        <span>Zwischensumme</span>
+                        <span id="subtotal"></span>
+                    </div>
+                    <div class="detail pb10">
+                        <span>Lieferkosten</span>
+                        <span id="delivery">5.00€</span>
+                    </div>
+                    <div class="detail">
+                        <span><b>Gesamt</b></span>
+                        <span id="total"><b></b></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <footer></footer>
+    <script type="module" src="./scripts/template.js"></script>
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./scripts/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/**** General ****/
+html, body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+body * {
+    box-sizing: border-box;
+}
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+h1 {
+    font-size: 40px;
+}
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.main-container {
+    display: flex;
+}
+.main-content {
+    flex: 0 0 calc(100% - 300px);
+    max-width: calc(100% - 300px);
+}
+img {
+    max-width: 100%;
+}
+/**** General ****/
+/**** Spacing ****/
+/**** Padding ****/
+.pb50 {
+    padding-bottom: 50px;
+}
+.pt20 {
+    padding-top: 20px;
+}
+.pr20 {
+    padding-right: 20px;
+}
+.pb20 {
+    padding-bottom: 20px;
+}
+.pl20 {
+    padding-left: 20px;
+}
+.pt10 {
+    padding-top: 10px;
+}
+.pr10 {
+    padding-right: 10px;
+}
+.pb10 {
+    padding-bottom: 10px;
+}
+.pl10 {
+    padding-left: 10px;
+}
+/**** Padding ****/
+/**** Margin ****/
+.mb20 {
+    margin-bottom: 20px;
+}
+/**** Margin ****/
+/**** Spacing ****/
+/**** Utility ****/
+.center {
+    text-align: center;
+}
+.radius {
+    border-radius: 7px;
+}
+/**** Utility ****/

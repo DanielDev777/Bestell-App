@@ -1,0 +1,49 @@
+.main-container {
+    padding: 80px 0;
+}
+.main-content .banner-img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+    position: relative;
+}
+.main-dishes img,
+.side-dishes img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+.main-dishes,
+.side-dishes {
+    padding: 0 20px;
+}
+.card {
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.card:hover {
+    background-color: rgba(60, 15, 78, .2);
+    cursor: pointer;
+}
+.card button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid #eee;
+    background-color: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-bottom-left-radius: 7px;
+    cursor: pointer;
+}
+.card button img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+.card .price {
+    font-weight: 700;
+    color: #3c0f4e;
+}

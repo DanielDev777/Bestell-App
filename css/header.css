@@ -1,0 +1,12 @@
+header {
+    background-color: #3c0f4e;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+}
+header img {
+    max-width: 100px;
+}
