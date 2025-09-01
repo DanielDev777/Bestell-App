@@ -32,11 +32,11 @@ function initListeners() {
     });
 }
 
-function saveToLocalStorage(name, data) {
+export function saveToLocalStorage(name, data) {
     localStorage.setItem(name, JSON.stringify(data));
 }
 
-function getFromLocalStorage(name) {
+export function getFromLocalStorage(name) {
     let value = JSON.parse(localStorage.getItem(name));
     return value;
 }

@@ -1,6 +1,7 @@
-import { cartItems } from "../script.js";
+import { cartItems, saveToLocalStorage, getFromLocalStorage } from "../script.js";
 
 let cart = document.getElementById('cart');
+let localItems = [];
 
 function createCartItem(item, i) {
     let cartItem = `
@@ -11,7 +12,7 @@ function createCartItem(item, i) {
                 <button class="minus-btn" class="radius" value="${i}">
                     <img src="./assets/img/icons/minus.svg">
                 </button>
-                <span class="pr10 pl10" id="item-amount">${item.amount}x</span>
+                <span class="pr10 pl10 item-amount">${item.amount}x</span>
                 <button class="plus-btn" class="radius" value="${i}">
                     <img src="./assets/img/icons/plus.svg">
                 </button>
@@ -32,7 +33,7 @@ document.addEventListener('add-to-cart', function() {
 
 window.addEventListener('load', function() {
     if (localStorage.getItem('cart')) {
-        let localItems = getFromLocalStorage('cart');
+        localItems = getFromLocalStorage('cart');
         addItemsToCart(localItems);
     }
     initListeners();
@@ -44,11 +45,6 @@ function addItemsToCart(array) {
         cart.innerHTML += createCartItem(item, index);
     });
     calculateSum(array);
-}
-
-function getFromLocalStorage(name) {
-    let value = JSON.parse(localStorage.getItem(name));
-    return value;
 }
 
 function calculateItemPrice(item) {
@@ -68,8 +64,17 @@ function calculateSum(array) {
 }
 
 function changeAmount() {
-    console.log(this);
-    
+    let value;
+    let amounts = Array.from(document.getElementsByClassName('item-amount'));
+    if (this.classList.contains('minus-btn')) {
+        value = -1;
+    } else if(this.classList.contains('plus-btn')) {
+        value = 1;
+    }
+    localItems[this.value].amount += value
+    saveToLocalStorage('cart', localItems);
+    addItemsToCart(localItems);
+    initListeners();
 }
 
 function initListeners() {
@@ -80,4 +85,17 @@ function initListeners() {
     Array.from(minusBtns).forEach((btn) => {
         btn.addEventListener('click', changeAmount);
     })
+    Array.from(plusBtns).forEach((btn) => {
+        btn.addEventListener('click', changeAmount);
+    })
+    Array.from(removeBtns).forEach((btn) => {
+        btn.addEventListener('click', removeItem);
+    })
+}
+
+function removeItem() {
+    localItems.splice(this.value, 1);
+    saveToLocalStorage('cart', localItems);
+    addItemsToCart(localItems);
+    initListeners();
 }
