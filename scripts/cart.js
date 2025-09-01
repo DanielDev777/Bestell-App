@@ -1,7 +1,10 @@
 import { cartItems, saveToLocalStorage, getFromLocalStorage } from "../script.js";
 
+export let localItems = [];
+
+let orderEvent = new CustomEvent('order');
 let cart = document.getElementById('cart');
-let localItems = [];
+let orderBtn = document.getElementById('order-btn');
 
 function createCartItem(item, i) {
     let cartItem = `
@@ -35,6 +38,7 @@ window.addEventListener('load', function() {
     if (localStorage.getItem('cart')) {
         localItems = getFromLocalStorage('cart');
         addItemsToCart(localItems);
+        orderBtn.disabled = false;
     }
     initListeners();
 })
@@ -44,10 +48,14 @@ function addItemsToCart(array) {
     array.forEach((item, index) => {
         cart.innerHTML += createCartItem(item, index);
     });
+    orderBtn.disabled = false;
+    localItems = array;
     calculateSum(array);
+    saveToLocalStorage('cart', array);
+    initListeners();
 }
 
-function calculateItemPrice(item) {
+export function calculateItemPrice(item) {
     let itemPrice = item.price * item.amount;
     return itemPrice;
 }
@@ -65,7 +73,6 @@ function calculateSum(array) {
 
 function changeAmount() {
     let value;
-    let amounts = Array.from(document.getElementsByClassName('item-amount'));
     if (this.classList.contains('minus-btn')) {
         value = -1;
     } else if(this.classList.contains('plus-btn')) {
@@ -84,18 +91,29 @@ function initListeners() {
     
     Array.from(minusBtns).forEach((btn) => {
         btn.addEventListener('click', changeAmount);
-    })
+    });
     Array.from(plusBtns).forEach((btn) => {
         btn.addEventListener('click', changeAmount);
-    })
+    });
     Array.from(removeBtns).forEach((btn) => {
         btn.addEventListener('click', removeItem);
-    })
+    });
+    orderBtn.addEventListener('click', orderItems);
 }
 
 function removeItem() {
     localItems.splice(this.value, 1);
     saveToLocalStorage('cart', localItems);
     addItemsToCart(localItems);
-    initListeners();
+    if (localItems.length === 0) {
+        orderBtn.disabled = true;
+    }
+}
+
+function orderItems() {
+    console.log('ORDER');
+    document.dispatchEvent(orderEvent);
+    cart.innerHTML = "";
+    localItems = [];
+    // saveToLocalStorage('cart', localItems);
 }

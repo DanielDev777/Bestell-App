@@ -8,6 +8,10 @@ window.addEventListener('load', function() {
     initListeners();
 })
 
+document.addEventListener('order', function() {
+    initListeners();  
+})
+
 function addToCart(e) {
     let btnValue = e.currentTarget.value;
     let dish = dishes[btnValue];

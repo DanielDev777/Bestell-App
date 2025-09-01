@@ -7,6 +7,9 @@
     width: 100%;
     position: relative;
 }
+.main-content > p {
+    color: #3c0f4e;
+}
 .main-dishes img,
 .side-dishes img {
     height: 150px;

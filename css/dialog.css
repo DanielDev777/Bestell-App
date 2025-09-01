@@ -1,0 +1,18 @@
+dialog {
+    height: 300px;
+    width: 300px;
+    background-color: #1A1523;
+    border: 0;
+    padding: 20px;
+    color: #fff;
+    border-radius: 7px;
+    position: fixed;
+}
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+dialog::backdrop {
+    background-color: #000;
+    opacity: .7;
+}

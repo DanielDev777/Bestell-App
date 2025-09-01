@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="./css/fontimport.css">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/main-section.css">
     <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/dialog.css">
 </head>
 <body>
     <header>
@@ -21,7 +23,8 @@
     <section class="main-container">
         <section class="main-content">
             <img src="./assets/img/main-banner.jpg" class="banner-img">
-            <h1 class="pt20 pr20 pb50 pl20">Pizza Heaven</h1>
+            <h1 class="pt20 pr20 pb20 pl20">Pizza Heaven</h1>
+            <p class="pr20 pb50 pl20">Bewertung: 4,7 von 5 Sternen</p>
             <div class="main-dishes">
                 <img src="./assets/img/pizza-banner.jpg" class="radius">
                 <h2 class="pb20">Hauptgerichte</h2>
@@ -52,11 +55,22 @@
                     </div>
                 </div>
             </div>
+            <button class="mt20" id="order-btn" disabled>Bestellen</button>
         </section>
     </section>
-    <footer></footer>
+    <dialog id="order-dialog">
+        <h2 class="pb20">Ihre Testbestellung war erfolgreich!</h2>
+        <p class="pb10">Sie haben bestellt:</p>
+        <div id="order-content"></div>
+    </dialog>
+    <footer class="pt20 pb20 center">
+        <div class="container">
+            &copy; Daniel Productions
+        </div>
+    </footer>
     <script type="module" src="./scripts/template.js"></script>
     <script type="module" src="./script.js"></script>
     <script type="module" src="./scripts/cart.js"></script>
+    <script type="module" src="./scripts/dialog.js"></script>
 </body>
 </html>
