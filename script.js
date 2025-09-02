@@ -1,8 +1,11 @@
 import { dishes } from './dishes.js';
+import { sum } from './scripts/cart.js';
 
 export let cartItems = [];
 
 let addEvent = new CustomEvent('add-to-cart');
+let cartBtn = document.getElementById('cart-btn');
+let cartRef = document.getElementById('cart-wrapper');
 
 window.addEventListener('load', function() {
     initListeners();
@@ -13,8 +16,7 @@ document.addEventListener('order', function() {
 })
 
 function addToCart(e) {
-    let btnValue = e.currentTarget.value;
-    let dish = dishes[btnValue];
+    let dish = dishes[e.currentTarget.value];
     if (localStorage.getItem('cart')) {
         cartItems = getFromLocalStorage('cart');
     }
@@ -22,6 +24,7 @@ function addToCart(e) {
         let localItemIndex = cartItems.findIndex(item => item.name === dish.name);
         cartItems[localItemIndex].amount++;
     } else {
+        dish.amount = 0;
         dish.amount++;
         cartItems.push(dish);
     }
@@ -43,4 +46,35 @@ export function saveToLocalStorage(name, data) {
 export function getFromLocalStorage(name) {
     let value = JSON.parse(localStorage.getItem(name));
     return value;
+}
+
+window.addEventListener('scroll', function() {
+    let currentScroll = this.window.scrollY + this.window.innerHeight;
+    if (currentScroll >= (document.body.scrollHeight - 50)) {
+        cartBtn.style.bottom = '59px';
+    } else {
+        if (cartBtn.style.bottom != '0px') {
+            cartBtn.style.bottom = '0px';
+        }
+    }
+})
+
+cartBtn.addEventListener('click', openCart);
+
+function openCart() {
+    cartRef.classList.toggle('hide-mobile');
+    if (!cartRef.classList.contains('hide-mobile')) {
+        cartBtn.innerText = 'schließen';
+    }  else {
+        cartBtn.innerText = 'Warenkorb';
+        showSumInButton();
+    }
+}
+
+document.addEventListener('calculated', showSumInButton);
+
+function showSumInButton() {
+    if (cartRef.classList.contains('hide-mobile') && sum > 5) {
+        cartBtn.innerText = `Warenkorb (${sum.toFixed(2)}€)`;
+    }
 }

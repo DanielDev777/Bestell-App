@@ -1,8 +1,10 @@
 import { cartItems, saveToLocalStorage, getFromLocalStorage } from "../script.js";
 
 export let localItems = [];
+export let sum = 0;
 
 let orderEvent = new CustomEvent('order');
+let calcEvent = new CustomEvent('calculated');
 let cart = document.getElementById('cart');
 let orderBtn = document.getElementById('order-btn');
 
@@ -61,24 +63,33 @@ export function calculateItemPrice(item) {
 }
 
 function calculateSum(array) {
+    sum = 0;
     let subtotal = document.getElementById('subtotal');
     let total = document.getElementById('total');
-    let sum = 0;
     array.forEach(item => {
         sum += calculateItemPrice(item);
     });
     subtotal.innerHTML = `${sum.toFixed(2)}€`
-    total.innerHTML = `${(sum + 5).toFixed(2)}€`
+    sum+= 5;
+    total.innerHTML = `${(sum).toFixed(2)}€`
+    if (array.length > 0) {
+        document.dispatchEvent(calcEvent);
+    }
+    return sum;
 }
 
-function changeAmount() {
+function changeAmount(e) {
+    
     let value;
     if (this.classList.contains('minus-btn')) {
         value = -1;
     } else if(this.classList.contains('plus-btn')) {
         value = 1;
     }
-    localItems[this.value].amount += value
+    localItems[this.value].amount += value;
+    if (localItems[this.value].amount === 0) {
+        removeItem(e);
+    }
     saveToLocalStorage('cart', localItems);
     addItemsToCart(localItems);
     initListeners();
@@ -101,8 +112,12 @@ function initListeners() {
     orderBtn.addEventListener('click', orderItems);
 }
 
-function removeItem() {
-    localItems.splice(this.value, 1);
+function removeItem(e) {
+    if (!this) {
+        localItems.splice(e.currentTarget.value, 1);
+    } else {
+        localItems.splice(this.value, 1);
+    }
     saveToLocalStorage('cart', localItems);
     addItemsToCart(localItems);
     if (localItems.length === 0) {
@@ -111,9 +126,13 @@ function removeItem() {
 }
 
 function orderItems() {
-    console.log('ORDER');
+    if (localItems.length === 0) {
+        alert('Warenkorb darf nicht leer sein...');
+        orderBtn.disabled = true;
+        return;
+    }
     document.dispatchEvent(orderEvent);
     cart.innerHTML = "";
     localItems = [];
-    // saveToLocalStorage('cart', localItems);
+    addItemsToCart(localItems);
 }

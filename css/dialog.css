@@ -1,5 +1,5 @@
 dialog {
-    height: 300px;
+    height: fit-content;
     width: 300px;
     background-color: #1A1523;
     border: 0;
@@ -15,4 +15,27 @@ dialog[open] {
 dialog::backdrop {
     background-color: #000;
     opacity: .7;
+}
+#close {
+    border: 0;
+    background: #1A1523;
+    /* position: absolute;
+    bottom: 5px;
+    right: 5px; */
+    color: #fff;
+    padding: 10px 12px;
+    width: 100%;
+    cursor: pointer;
+}
+#close:hover {
+    filter: brightness(1.5);
+}
+#close img {
+    width: 30px;
+    height: 30px;
+}
+#order-content p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

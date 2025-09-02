@@ -50,3 +50,29 @@
     font-weight: 700;
     color: #3c0f4e;
 }
+#cart-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    padding: 24px 12px;
+    color: #fff;
+    background-color: #3c0f4e;
+    border: 0;
+    cursor: pointer;
+}
+
+/**** Queries ****/
+@media (min-width: 768px) {
+    .show-mobile {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .main-content {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+/**** Queries ****/
