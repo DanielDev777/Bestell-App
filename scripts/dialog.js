@@ -1,7 +1,7 @@
 import { localItems, calculateItemPrice } from "./cart.js";
 
-
 let dialog = document.getElementById('order-dialog');
+let orderContent = document.getElementById('order-content');
 
 document.addEventListener('order', openDialog);
 
@@ -11,7 +11,6 @@ function openDialog() {
 }
 
 function showOrderDetails(items) {
-    let orderContent = document.getElementById('order-content');
     let sum = 0;
     items.forEach(item => {
         sum += calculateItemPrice(item);
@@ -32,4 +31,5 @@ function closeDialog(e) {
     if (e.target === dialog || e.target === closeBtn || e.key === "esc") {
         dialog.close();
     }
+    orderContent.innerHTML = "";
 }
