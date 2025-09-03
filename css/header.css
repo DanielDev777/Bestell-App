@@ -7,6 +7,9 @@ header {
     z-index: 1;
     width: 100%;
 }
+header.header-home {
+    position: unset;
+}
 header img {
     max-width: 100px;
 }

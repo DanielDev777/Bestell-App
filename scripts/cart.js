@@ -1,4 +1,5 @@
-import { cartItems, saveToLocalStorage, getFromLocalStorage } from "../script.js";
+import { cartItems, saveToLocalStorage, getFromLocalStorage } from "./restaurant.js";
+import { restaurants } from "../dishes.js";
 
 export let localItems = [];
 export let sum = 0;
@@ -7,6 +8,7 @@ let orderEvent = new CustomEvent('order');
 let calcEvent = new CustomEvent('calculated');
 let cart = document.getElementById('cart');
 let orderBtn = document.getElementById('order-btn');
+let establishment;
 
 function createCartItem(item, i) {
     let cartItem = `
@@ -37,8 +39,9 @@ document.addEventListener('add-to-cart', function() {
 });
 
 window.addEventListener('load', function() {
-    if (localStorage.getItem('cart')) {
-        localItems = getFromLocalStorage('cart');
+    establishment = restaurants[0];
+    if (localStorage.getItem(establishment.name + ' cart')) {
+        localItems = getFromLocalStorage(establishment.name + ' cart');
         addItemsToCart(localItems);
     }
     initListeners();
@@ -54,7 +57,7 @@ function addItemsToCart(array) {
     }
     localItems = array;
     calculateSum(array);
-    saveToLocalStorage('cart', array);
+    saveToLocalStorage(establishment.name + ' cart', array);
     initListeners();
 }
 
@@ -91,7 +94,7 @@ function changeAmount(e) {
     if (localItems[this.value].amount === 0) {
         removeItem(e);
     }
-    saveToLocalStorage('cart', localItems);
+    saveToLocalStorage(establishment.name + ' cart', localItems);
     addItemsToCart(localItems);
     initListeners();
 }
@@ -119,7 +122,7 @@ function removeItem(e) {
     } else {
         localItems.splice(this.value, 1);
     }
-    saveToLocalStorage('cart', localItems);
+    saveToLocalStorage(establishment.name + ' cart', localItems);
     addItemsToCart(localItems);
     if (localItems.length === 0) {
         orderBtn.disabled = true;

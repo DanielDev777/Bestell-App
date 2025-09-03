@@ -76,6 +76,12 @@ img {
 .radius {
     border-radius: 7px;
 }
+.d-flex {
+    display: flex;
+}
+.align-items-center {
+    align-items: center;
+}
 /**** Utility ****/
 
 /**** Queries ****/

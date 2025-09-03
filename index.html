@@ -1,80 +1,60 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestellapp</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo/favicon.ico">
 
     <link rel="stylesheet" href="./css/fontimport.css">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/main-section.css">
-    <link rel="stylesheet" href="./css/cart.css">
-    <link rel="stylesheet" href="./css/dialog.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-    <header>
+    <header class="header-home">
         <div class="container">
-            <img src="./assets/img/logo/Bestell App- Logo.svg">
+            <a href="./index.html">
+                <img src="./assets/img/logo/Bestell App- Logo.svg">
+            </a>
         </div>
     </header>
-    <section class="main-container">
-        <section class="main-content">
-            <img src="./assets/img/main-banner.jpg" class="banner-img">
-            <h1 class="pt20 pr20 pb20 pl20">Pizza Heaven</h1>
-            <p class="pr20 pb50 pl20">Bewertung: 4,7 von 5 Sternen</p>
-            <div class="main-dishes">
-                <img src="./assets/img/pizza-banner.jpg" class="radius">
-                <h2 class="pb20">Hauptgerichte</h2>
-                <div id="main-course"></div>
-            </div>
-            <div class="side-dishes">
-                <img src="./assets/img/pizza-rolls.jpg" class="radius">
-                <h2 class="pb20">Beilagen</h2>
-                <div id="snacks"></div>
-            </div>
-            <button class="show-mobile" id="cart-btn">Warenkorb</button>
-        </section>
-        <section class="side-content hide-mobile" id="cart-wrapper">
-            <h3 class="pt20 pb20 center">Warenkorb</h3>
-            <div class="pr10 pl10" id="cart"></div>
-            <div class="pt10 pr10 pl10" id="cart-summary">
-                <div class="summary-details">
-                    <div class="detail pb10">
-                        <span>Zwischensumme</span>
-                        <span id="subtotal"></span>
+    <section>
+        <div class="container">
+            <h1>Bestellapp</h1>
+            <div class="pt20 pb20" id="restaurant-list">
+                <div class="card radius pb20 mt20 mb20">
+                    <img src="./assets/img/main-banner.jpg" id="card-banner">
+                    <div class="card-info pt20 pr20 pb20 pl20">
+                        <h2>Pizza Heaven</h2>
+                        <div class="rating-group">
+                            <img src="./assets/img/icons/star.svg">
+                            <p><span id="rating">4.2</span>/5</p>
+                        </div>
                     </div>
-                    <div class="detail pb10">
-                        <span>Lieferkosten</span>
-                        <span id="delivery">5.00€</span>
-                    </div>
-                    <div class="detail">
-                        <span><b>Gesamt</b></span>
-                        <span id="total"><b></b></span>
+                    <div class="card-bottom-info pr20 pl20">
+                        <div class="delivery-cost pr20 d-flex align-items-center">
+                            <img src="./assets/img/icons/delivery.svg">
+                            <span id="delivery-cost">3.00€</span>
+                        </div>
+                        <div class="delivery-time pr20 d-flex align-items-center">
+                            <img src="./assets/img/icons/clock.svg">
+                            <span id="delivery-time">25 Min.</span>
+                        </div>
+                        <div class="min-price pr20 d-flex align-items-center">
+                            <img src="./assets/img/icons/cost.svg">
+                            <span id="min-price">12€</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="mt20" id="order-btn" disabled>Bestellen</button>
-        </section>
+        </div>
     </section>
-    <dialog id="order-dialog">
-        <h2 class="pb20">Ihre Testbestellung war erfolgreich!</h2>
-        <p class="pb10">Sie haben bestellt:</p>
-        <div id="order-content"></div>
-        <button class="mt20" id="close">
-             Schließen
-        </button>
-    </dialog>
     <footer class="pt20 pb20 center">
         <div class="container">
             &copy; Daniel Productions
         </div>
     </footer>
-    <script type="module" src="./scripts/template.js"></script>
     <script type="module" src="./script.js"></script>
-    <script type="module" src="./scripts/cart.js"></script>
-    <script type="module" src="./scripts/dialog.js"></script>
 </body>
 </html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellapp</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="./css/fontimport.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/main-section.css">
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/dialog.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="./index.html">
+                <img src="./assets/img/logo/Bestell App- Logo.svg">
+            </a>
+        </div>
+    </header>
+    <section class="main-container">
+        <section class="main-content">
+            <img src="" class="banner-img" id="banner-img">
+            <h1 id="restaurant-name" class="pt20 pr20 pb20 pl20"></h1>
+            <p class="pr20 pb50 pl20">Bewertung: 
+                <span id="rating"></span>
+                von 5 Sternen</p>
+            <div class="main-dishes">
+                <img src="" class="radius" id="main-img">
+                <h2 class="pb20">Hauptgerichte</h2>
+                <div id="main-course"></div>
+            </div>
+            <div class="side-dishes">
+                <img src="" class="radius" id="side-img">
+                <h2 class="pb20">Beilagen</h2>
+                <div id="snacks"></div>
+            </div>
+            <button class="show-mobile" id="cart-btn">Warenkorb</button>
+        </section>
+        <section class="side-content hide-mobile" id="cart-wrapper">
+            <h3 class="pt20 pb20 center">Warenkorb</h3>
+            <div class="pr10 pl10" id="cart"></div>
+            <div class="pt10 pr10 pl10" id="cart-summary">
+                <div class="summary-details">
+                    <div class="detail pb10">
+                        <span>Zwischensumme</span>
+                        <span id="subtotal"></span>
+                    </div>
+                    <div class="detail pb10">
+                        <span>Lieferkosten</span>
+                        <span id="delivery">5.00€</span>
+                    </div>
+                    <div class="detail">
+                        <span><b>Gesamt</b></span>
+                        <span id="total"><b></b></span>
+                    </div>
+                </div>
+            </div>
+            <button class="mt20" id="order-btn" disabled>Bestellen</button>
+        </section>
+    </section>
+    <dialog id="order-dialog">
+        <h2 class="pb20">Ihre Testbestellung war erfolgreich!</h2>
+        <p class="pb10">Sie haben bestellt:</p>
+        <div id="order-content"></div>
+        <button class="mt20" id="close">
+             Schließen
+        </button>
+    </dialog>
+    <footer class="pt20 pb20 center">
+        <div class="container">
+            &copy; Daniel Productions
+        </div>
+    </footer>
+    <script type="module" src="./scripts/template.js"></script>
+    <script type="module" src="./scripts/restaurant.js"></script>
+    <script type="module" src="./scripts/cart.js"></script>
+    <script type="module" src="./scripts/dialog.js"></script>
+</body>
+</html>

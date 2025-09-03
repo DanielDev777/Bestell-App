@@ -1,80 +1,41 @@
-import { dishes } from './dishes.js';
-import { sum } from './scripts/cart.js';
+import { restaurants } from './dishes.js';
 
-export let cartItems = [];
-
-let addEvent = new CustomEvent('add-to-cart');
-let cartBtn = document.getElementById('cart-btn');
-let cartRef = document.getElementById('cart-wrapper');
-
-window.addEventListener('load', function() {
-    initListeners();
-})
-
-document.addEventListener('order', function() {
-    initListeners();  
-})
-
-function addToCart(e) {
-    let dish = dishes[e.currentTarget.value];
-    if (localStorage.getItem('cart')) {
-        cartItems = getFromLocalStorage('cart');
-    }
-    if (cartItems.findIndex(item => item.name === dish.name) !== -1) {
-        let localItemIndex = cartItems.findIndex(item => item.name === dish.name);
-        cartItems[localItemIndex].amount++;
-    } else {
-        dish.amount = 0;
-        dish.amount++;
-        cartItems.push(dish);
-    }
-    saveToLocalStorage('cart', cartItems);
-    document.dispatchEvent(addEvent);
+function createListItem(item, i) {
+    let listItem = `
+        <div class="card radius pb20 mt20 mb20">
+            <img src="${item.images.main}" id="card-banner">
+            <div class="card-info pt20 pr20 pb20 pl20">
+                <h2>${item.name}</h2>
+                <div class="rating-group">
+                    <img src="./assets/img/icons/star.svg">
+                    <p><span id="rating">${item.rating}</span>/5</p>
+                </div>
+            </div>
+            <div class="card-bottom-info pr20 pl20">
+                <div class="delivery-cost pr20 d-flex align-items-center">
+                    <img src="./assets/img/icons/delivery.svg">
+                    <span id="delivery-cost">${item.deliveryCost.toFixed(2)}€</span>
+                </div>
+                <div class="delivery-time pr20 d-flex align-items-center">
+                    <img src="./assets/img/icons/clock.svg">
+                    <span id="delivery-time">${item.deliveryTime}</span>
+                </div>
+                <div class="min-price pr20 d-flex align-items-center">
+                    <img src="./assets/img/icons/cost.svg">
+                    <span id="min-price">${item.minOrderCost}€</span>
+                </div>
+            </div>
+        </div>
+    `;
+    return listItem;
 }
 
-function initListeners() {
-    let addBtns = document.getElementsByClassName('add-btn');
-    Array.from(addBtns).forEach(btn => {
-        btn.addEventListener('click', addToCart);
-    });
-}
+window.addEventListener('load', renderRestaurants);
 
-export function saveToLocalStorage(name, data) {
-    localStorage.setItem(name, JSON.stringify(data));
-}
-
-export function getFromLocalStorage(name) {
-    let value = JSON.parse(localStorage.getItem(name));
-    return value;
-}
-
-window.addEventListener('scroll', function() {
-    let currentScroll = this.window.scrollY + this.window.innerHeight;
-    if (currentScroll >= (document.body.scrollHeight - 50)) {
-        cartBtn.style.bottom = '59px';
-    } else {
-        if (cartBtn.style.bottom != '0px') {
-            cartBtn.style.bottom = '0px';
-        }
-    }
-})
-
-cartBtn.addEventListener('click', openCart);
-
-function openCart() {
-    cartRef.classList.toggle('hide-mobile');
-    if (!cartRef.classList.contains('hide-mobile')) {
-        cartBtn.innerText = 'schließen';
-    }  else {
-        cartBtn.innerText = 'Warenkorb';
-        showSumInButton();
-    }
-}
-
-document.addEventListener('calculated', showSumInButton);
-
-function showSumInButton() {
-    if (cartRef.classList.contains('hide-mobile') && sum > 5) {
-        cartBtn.innerText = `Warenkorb (${sum.toFixed(2)}€)`;
-    }
+function renderRestaurants() {
+    let restListRef = document.getElementById('restaurant-list');
+    restListRef.innerHTML = "";
+    restaurants.forEach((item, index) => {
+        restListRef.innerHTML += createListItem(item, index);
+    })
 }
