@@ -104,7 +104,7 @@ function initInfoVars() {
     return infoVars;
 }
 
-function checkPath() {
+export function checkPath() {
     if (window.location.pathname == '/Projekte/bestell-app/restaurant.html' || window.location.pathname == '/Projekte/bestell-app/' || window.location.pathname == '/bestellapp/' || window.location.pathname == '/bestellapp/restaurant.html') {
         return true;
     }
