@@ -7,6 +7,15 @@
     width: 100%;
     position: relative;
 }
+.home-link {
+    display: block;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all .3s ease;
+}
+.home-link:hover {
+    filter: brightness(1.2);
+}
 .main-content > p {
     color: #3c0f4e;
 }

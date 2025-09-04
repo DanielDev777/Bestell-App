@@ -1,4 +1,3 @@
-import { restaurants } from '../dishes.js';
 import { sum } from './cart.js';
 
 export let cartItems = [];
@@ -6,12 +5,15 @@ export let cartItems = [];
 let addEvent = new CustomEvent('add-to-cart');
 let cartBtn = document.getElementById('cart-btn');
 let cartRef = document.getElementById('cart-wrapper');
-let establishment;
+export let establishment;
 
 window.addEventListener('load', function() {
-    establishment = restaurants[0];
-    initListeners();
-    fillInfo();
+    if (checkPath()) {
+        establishment = setRestaurant();
+        document.title = establishment.name;
+        initListeners();
+        fillInfo();
+    }
 })
 
 document.addEventListener('order', function() {
@@ -40,6 +42,7 @@ function initListeners() {
     Array.from(addBtns).forEach(btn => {
         btn.addEventListener('click', addToCart);
     });
+    cartBtn.addEventListener('click', openCart);
 }
 
 export function saveToLocalStorage(name, data) {
@@ -62,8 +65,6 @@ window.addEventListener('scroll', function() {
     }
 })
 
-cartBtn.addEventListener('click', openCart);
-
 function openCart() {
     cartRef.classList.toggle('hide-mobile');
     if (!cartRef.classList.contains('hide-mobile')) {
@@ -84,7 +85,6 @@ function showSumInButton() {
 
 function fillInfo() {
     let infoVars = initInfoVars();
-    console.log(infoVars);
     
     infoVars.nameRef.innerHTML = establishment.name;
     infoVars.ratingRef.innerHTML = establishment.rating;
@@ -102,4 +102,15 @@ function initInfoVars() {
         sideImg: document.getElementById('side-img')
     }
     return infoVars;
+}
+
+function checkPath() {
+    if (window.location.pathname == '/Projekte/bestell-app/restaurant.html' || window.location.pathname == '/Projekte/bestell-app/' || window.location.pathname == '/bestellapp/' || window.location.pathname == '/bestellapp/restaurant.html') {
+        return true;
+    }
+}
+
+export function setRestaurant() {
+    let restaurant = getFromLocalStorage('currentRestaurant');
+    return restaurant;
 }

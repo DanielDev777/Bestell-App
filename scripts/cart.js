@@ -1,5 +1,4 @@
-import { cartItems, saveToLocalStorage, getFromLocalStorage } from "./restaurant.js";
-import { restaurants } from "../dishes.js";
+import { cartItems, saveToLocalStorage, getFromLocalStorage, setRestaurant, checkPath } from "./restaurant.js";
 
 export let localItems = [];
 export let sum = 0;
@@ -39,12 +38,14 @@ document.addEventListener('add-to-cart', function() {
 });
 
 window.addEventListener('load', function() {
-    establishment = restaurants[0];
-    if (localStorage.getItem(establishment.name + ' cart')) {
-        localItems = getFromLocalStorage(establishment.name + ' cart');
-        addItemsToCart(localItems);
+    if (checkPath()) {
+        establishment = setRestaurant();
+        if (localStorage.getItem(establishment.name + ' cart')) {
+            localItems = getFromLocalStorage(establishment.name + ' cart');
+            addItemsToCart(localItems);
+        }
+        initListeners();
     }
-    initListeners();
 })
 
 function addItemsToCart(array) {

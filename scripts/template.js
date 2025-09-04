@@ -1,4 +1,4 @@
-import { restaurants } from '../dishes.js';
+import { establishment } from "./restaurant.js"; 
 
 function createCard(item, i) {
     item = `
@@ -17,7 +17,6 @@ function createCard(item, i) {
 function renderDishes() {
     let mainRef = document.getElementById('main-course');
     let sideRef = document.getElementById('snacks');
-    let establishment = restaurants[0];
     mainRef.innerHTML = "";
     sideRef.innerHTML = "";
     establishment.dishes.forEach((item, index) => {
