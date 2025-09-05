@@ -1,5 +1,4 @@
 import { restaurants } from './dishes.js';
-import { saveToLocalStorage } from './scripts/restaurant.js';
 
 function createListItem(item, i) {
     let listItem = `
@@ -31,17 +30,11 @@ function createListItem(item, i) {
     return listItem;
 }
 
-window.addEventListener('load', function() {
-    if (checkPath()) {
-        renderRestaurants();
-        initListener();
-    }
-});
+window.addEventListener('load', initHome());
 
-function checkPath() {
-    if (window.location.pathname == '/Projekte/bestell-app/index.html' || window.location.pathname == '/Projekte/bestell-app/' || window.location.pathname == '/bestellapp/' || window.location.pathname == '/bestellapp/index.html') {
-        return true;
-    }
+function initHome() {
+    renderRestaurants();
+    initListener();
 }
 
 function initListener() {
@@ -64,4 +57,8 @@ function moveToRestaurant(e) {
     let restaurant = restaurants[restValue];
     saveToLocalStorage('currentRestaurant', restaurant);
     window.location.href = "./restaurant.html";
+}
+
+function saveToLocalStorage(name, data) {
+    localStorage.setItem(name, JSON.stringify(data));
 }

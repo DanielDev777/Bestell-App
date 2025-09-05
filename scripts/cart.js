@@ -37,16 +37,16 @@ document.addEventListener('add-to-cart', function() {
     addItemsToCart(cartItems);
 });
 
-window.addEventListener('load', function() {
-    if (checkPath()) {
-        establishment = setRestaurant();
-        if (localStorage.getItem(establishment.name + ' cart')) {
-            localItems = getFromLocalStorage(establishment.name + ' cart');
-            addItemsToCart(localItems);
-        }
-        initListeners();
+document.body.addEventListener('load', init);
+
+function init() {
+    establishment = setRestaurant();
+    if (localStorage.getItem(establishment.name + ' cart')) {
+        localItems = getFromLocalStorage(establishment.name + ' cart');
+        addItemsToCart(localItems);
     }
-})
+    initListeners();
+}
 
 function addItemsToCart(array) {
     cart.innerHTML = "";

@@ -7,14 +7,14 @@ let cartBtn = document.getElementById('cart-btn');
 let cartRef = document.getElementById('cart-wrapper');
 export let establishment;
 
-window.addEventListener('load', function() {
-    if (checkPath()) {
-        establishment = setRestaurant();
-        document.title = establishment.name;
-        initListeners();
-        fillInfo();
-    }
-})
+window.addEventListener('load', init);
+
+function init() {
+    establishment = setRestaurant();
+    document.title = establishment.name;
+    initListeners();
+    fillInfo();
+}
 
 document.addEventListener('order', function() {
     initListeners();  
@@ -42,7 +42,9 @@ function initListeners() {
     Array.from(addBtns).forEach(btn => {
         btn.addEventListener('click', addToCart);
     });
-    cartBtn.addEventListener('click', openCart);
+    if (cartBtn) {
+        cartBtn.addEventListener('click', openCart);
+    }
 }
 
 export function saveToLocalStorage(name, data) {
@@ -55,12 +57,14 @@ export function getFromLocalStorage(name) {
 }
 
 window.addEventListener('scroll', function() {
-    let currentScroll = this.window.scrollY + this.window.innerHeight;
-    if (currentScroll >= (document.body.scrollHeight - 50)) {
-        cartBtn.style.bottom = '59px';
-    } else {
-        if (cartBtn.style.bottom != '0px') {
-            cartBtn.style.bottom = '0px';
+    if (checkPath()) {
+        let currentScroll = this.window.scrollY + this.window.innerHeight;
+        if (currentScroll >= (document.body.scrollHeight - 50)) {
+            cartBtn.style.bottom = '59px';
+        } else {
+            if (cartBtn.style.bottom != '0px') {
+                cartBtn.style.bottom = '0px';
+            }
         }
     }
 })
