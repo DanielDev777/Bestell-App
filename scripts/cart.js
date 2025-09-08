@@ -1,4 +1,4 @@
-import { cartItems, saveToLocalStorage, getFromLocalStorage, setRestaurant, checkPath } from "./restaurant.js";
+import { cartItems, saveToLocalStorage, getFromLocalStorage, setRestaurant, establishment } from "./restaurant.js";
 
 export let localItems = [];
 export let sum = 0;
@@ -7,7 +7,6 @@ let orderEvent = new CustomEvent('order');
 let calcEvent = new CustomEvent('calculated');
 let cart = document.getElementById('cart');
 let orderBtn = document.getElementById('order-btn');
-let establishment;
 
 function createCartItem(item, i) {
     let cartItem = `

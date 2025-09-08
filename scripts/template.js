@@ -28,4 +28,4 @@ function renderDishes() {
     });
 }
 
-window.addEventListener('load', renderDishes);
+window.addEventListener('render', renderDishes);

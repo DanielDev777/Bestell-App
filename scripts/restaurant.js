@@ -3,6 +3,7 @@ import { sum } from './cart.js';
 export let cartItems = [];
 
 let addEvent = new CustomEvent('add-to-cart');
+let renderEvent = new CustomEvent('render');
 let cartBtn = document.getElementById('cart-btn');
 let cartRef = document.getElementById('cart-wrapper');
 export let establishment;
@@ -11,9 +12,10 @@ window.addEventListener('load', init);
 
 function init() {
     establishment = setRestaurant();
+    dispatchEvent(renderEvent);
     document.title = establishment.name;
-    initListeners();
     fillInfo();
+    initListeners();
 }
 
 document.addEventListener('order', function() {
